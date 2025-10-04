@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Passcrypter</string>
+    <string name="eusername">Enter Username</string>
+    <string name="Login">Login</string>
+    <string name="epassword">Enter Password</string>
+
+    
 </resources>
