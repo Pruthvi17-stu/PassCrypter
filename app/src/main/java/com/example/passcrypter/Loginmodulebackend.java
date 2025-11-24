@@ -39,21 +39,25 @@ public class Loginmodulebackend extends AppCompatActivity {
         InputMethodManager passwordin=(InputMethodManager)getSystemService(Loginmodulebackend.INPUT_METHOD_SERVICE);
         passwordin.showSoftInput(password,InputMethodManager.SHOW_IMPLICIT);
         Submit.setOnClickListener(new View.OnClickListener() {
-            String UserNameInput=username.getText().toString().trim();
-            String PasswordInput=username.getText().toString().trim();
+
 
             @Override
             public void onClick(View v) {
-                if(UserNameInput.isBlank() && PasswordInput.isBlank())
-                {
-                    Toast.makeText(Loginmodulebackend.this, "Fill both the fields", Toast.LENGTH_SHORT).show();
+                String UserNameInput=username.getText().toString().trim();
+                String PasswordInput=username.getText().toString().trim();
 
-                } else if (UserNameInput.isBlank() ||PasswordInput.isBlank()) {
+                 if (UserNameInput.isEmpty() || PasswordInput.isEmpty()) {
                     Toast.makeText(Loginmodulebackend.this, "Both fields are required", Toast.LENGTH_SHORT).show();
 
                 }
                 else{
                     Toast.makeText(Loginmodulebackend.this, "Login Sucessful", Toast.LENGTH_SHORT).show();
+
+                    //Creating an intent from the login page to the home page
+                     Intent homeintent = new Intent(Loginmodulebackend.this,MainActivity.class);
+                     homeintent.putExtra("username" ,UserNameInput);
+                     startActivity(homeintent);
+                     finish();
 
                 }
 
