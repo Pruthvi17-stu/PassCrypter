@@ -9,6 +9,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -42,6 +44,9 @@ public class MainActivity extends AppCompatActivity {
         addfab1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent addintent = new Intent(MainActivity.this,addandmanagepage.class);
+                startActivity(addintent);
+
 
             }
         });
