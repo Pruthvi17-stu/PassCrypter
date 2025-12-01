@@ -46,13 +46,17 @@ public class MainActivity extends AppCompatActivity {
         modefab2=findViewById(R.id.modeexfab);
         filefab3=findViewById(R.id.filesfab3);
         mainmt=findViewById(R.id.toolbar);
-        mainmt.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                return false;
-            }
+        mainmt.setOnMenuItemClickListener(item ->{
+            if(item.getItemId()==R.id.action_settings)
+            {
+                Intent settingsintent = new Intent(MainActivity.this,settingspage.class);
+                startActivity(settingsintent);
 
-            });
+                return true;//handled the activity
+            }
+            return false ;//not handled the activity
+
+                });
 
         addfab1.setOnClickListener(new View.OnClickListener() {
             @Override
