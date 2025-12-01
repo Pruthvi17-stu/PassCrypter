@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="black">#FF000000</color>
-    <color name="white">#E0D3D3</color>
+    <color name="white">#FFFFFF</color>
     <color name="green">#BBE6C3</color>
+    <color name="toolbar_background">#45A6F6</color>
     <color name="edittextcolor">#4A4C56</color>
 
 

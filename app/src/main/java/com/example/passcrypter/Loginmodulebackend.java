@@ -44,7 +44,7 @@ public class Loginmodulebackend extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String UserNameInput=username.getText().toString().trim();
-                String PasswordInput=username.getText().toString().trim();
+                String PasswordInput=password.getText().toString().trim();
 
                  if (UserNameInput.isEmpty() || PasswordInput.isEmpty()) {
                     Toast.makeText(Loginmodulebackend.this, "Both fields are required", Toast.LENGTH_SHORT).show();
