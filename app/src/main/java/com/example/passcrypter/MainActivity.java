@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
         mainmt.setOnMenuItemClickListener(item ->{
             if(item.getItemId()==R.id.action_settings)
             {
-                Intent settingsintent = new Intent(MainActivity.this,settingspage.class);
+                Intent settingsintent = new Intent(MainActivity.this,settingsactivty.class);
                 startActivity(settingsintent);
 
                 return true;//handled the activity
