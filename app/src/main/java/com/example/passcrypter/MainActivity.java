@@ -2,15 +2,20 @@ package com.example.passcrypter;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.graphics.Insets;
+import androidx.core.view.MenuProvider;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.lifecycle.Lifecycle;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -46,17 +51,29 @@ public class MainActivity extends AppCompatActivity {
         modefab2=findViewById(R.id.modeexfab);
         filefab3=findViewById(R.id.filesfab3);
         mainmt=findViewById(R.id.toolbar);
-        mainmt.setOnMenuItemClickListener(item ->{
-            if(item.getItemId()==R.id.action_settings)
-            {
-                Intent settingsintent = new Intent(MainActivity.this,settingsactivty.class);
-                startActivity(settingsintent);
-
-                return true;//handled the activity
+        mainmt.addMenuProvider(new MenuProvider() {
+            @Override
+            public void onCreateMenu(@NonNull Menu menu, @NonNull MenuInflater menuInflater) {
+                // THIS IS THE MISSING PIECE:
+                // Inflate your menu resource file.
+                // Replace 'R.menu.main_menu' with the actual name of your menu file if it's different.
+                menuInflater.inflate(R.menu.toolbar_menu, menu);
             }
-            return false ;//not handled the activity
 
-                });
+            @Override
+            public boolean onMenuItemSelected(@NonNull MenuItem menuItem) {
+                // Your click handling logic here is correct.
+                if (menuItem.getItemId() == R.id.action_settings) {
+                    Intent settingsintent = new Intent(MainActivity.this, settingsactivty.class);
+                    startActivity(settingsintent);
+                    return true; // We handled the menu item click
+                }
+                return false; // We did not handle the menu item click
+            }
+        }, this, Lifecycle.State.RESUMED);
+
+
+
 
         addfab1.setOnClickListener(new View.OnClickListener() {
             @Override

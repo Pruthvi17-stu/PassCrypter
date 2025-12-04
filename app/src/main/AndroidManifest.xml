@@ -23,6 +23,11 @@
         <activity
             android:name=".addandmanagepage"
             android:exported="false" />
+        <activity android:name=".settingsactivty"
+            android:exported="false" />
+        <activity android:name=".Loginmodulebackend"
+            android:exported="false" />
+
     </application>
 
 </manifest>
