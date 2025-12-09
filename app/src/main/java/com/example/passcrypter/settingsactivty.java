@@ -1,5 +1,8 @@
 package com.example.passcrypter;
 
+import static android.content.Intent.createChooser;
+
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -46,20 +49,34 @@ public class settingsactivty extends AppCompatActivity {
             SharedPreferences.Editor editor = spf.edit();
             editor.putBoolean(KEY_THEME, isChecked);
             editor.apply();
-            if(isChecked=true){
+            if (isChecked) {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
                 Toast.makeText(settingsactivty.this, "Night mode enabled", Toast.LENGTH_SHORT).show();
-            }
-            else {
+            } else {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
                 Toast.makeText(settingsactivty.this, "Night mode disabled", Toast.LENGTH_SHORT).show();
             }
 
 
         }));
+        reportbug.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String recipentEmail = "prutviindalkar@gmail.com";
+                String subject = "Regarding the bugs in the app";
+                String body = "Describe the bug you found";
+                Intent intent = new Intent(Intent.ACTION_SENDTO);
+                intent.setData(android.net.Uri.parse("mailto:"));
+                intent.putExtra(Intent.EXTRA_EMAIL, new String[]{recipentEmail});
+                intent.putExtra(Intent.EXTRA_SUBJECT, subject);
+                intent.putExtra(Intent.EXTRA_TEXT, body);
+                try {
+                    startActivity(createChooser(intent, "Send Email"));
+                    Toast.makeText(settingsactivty.this, "Opening email app", Toast.LENGTH_SHORT).show();
 
-
-    }
-
-}
-
+                } catch (ActivityNotFoundException e) {
+                    Toast.makeText(settingsactivty.this, "No email app found", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+    }}

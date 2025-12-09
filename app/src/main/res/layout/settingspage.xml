@@ -9,20 +9,14 @@
 
 
 
-        <!-- 1. TOP BAR with Back Arrow and Title -->
+
         <RelativeLayout
             android:id="@+id/settings_topbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="@color/white"
-            android:elevation="4dp"> <!-- Adds a subtle shadow for depth -->
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
-                app:cardCornerRadius="10dp"/>
+            android:elevation="4dp">
+
             <ImageView
                 android:id="@+id/back_arrow"
                 android:layout_width="48dp"
@@ -45,7 +39,7 @@
         </RelativeLayout>
 
 
-    <!-- 2. SCROLLVIEW to hold all settings cards -->
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -57,7 +51,7 @@
             android:paddingTop="16dp"
             android:paddingBottom="16dp">
 
-            <!-- CARD 1: APP THEME -->
+
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -65,7 +59,7 @@
                 android:layout_marginEnd="16dp"
                 app:cardCornerRadius="10dp">
 
-                <!-- The RelativeLayout is now INSIDE the CardView -->
+
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
