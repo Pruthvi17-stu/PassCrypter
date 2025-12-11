@@ -22,8 +22,8 @@ public class settingsactivty extends AppCompatActivity {
     public final String APP_PREFERENCES = "APPSETTINGS";
     public final String KEY_THEME = "isNIGHT_MODE";
 
-    ImageView backarrow;
-    SwitchMaterial apptheme, appmode;
+    ImageView backarrow,appmode;
+    SwitchMaterial apptheme;
     RelativeLayout reportbug, appversion;
 
     @Override
@@ -59,6 +59,16 @@ public class settingsactivty extends AppCompatActivity {
 
 
         }));
+        appmode.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(settingsactivty.this, appmode.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
         reportbug.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
