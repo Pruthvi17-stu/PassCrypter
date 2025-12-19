@@ -2,8 +2,7 @@ package com.example.passcrypter;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.hardware.biometrics.BiometricPrompt;
-import android.hardware.biometrics.BiometricPrompt.AuthenticationCallback;
+
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -40,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
     private androidx.biometric.BiometricPrompt.PromptInfo promptInfo;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
         });
         SharedPreferences spf = getSharedPreferences(appmode.Prefs_name, MODE_PRIVATE);
         boolean isSeriousModeOn = spf.getBoolean(appmode.KEY_MODE, false);
+        isSeriousModeOn=false;
         if (isSeriousModeOn) {
             setupAndShowBiometricPrompt();
 
@@ -66,20 +67,20 @@ public class MainActivity extends AppCompatActivity {
         executor = ContextCompat.getMainExecutor(this);
 
         biometricPrompt = new androidx.biometric.BiometricPrompt(MainActivity.this, executor, new androidx.biometric.BiometricPrompt.AuthenticationCallback() {
+
             @Override
             public void onAuthenticationError(int errorCode, @NonNull CharSequence errString) {
                 super.onAuthenticationError(errorCode, errString);
-
                 Toast.makeText(getApplicationContext(), "Authentication required. Exiting.", Toast.LENGTH_SHORT).show();
                 finish();
             }
 
             @Override
-            public void onAuthenticationSucceeded(@NonNull BiometricPrompt.AuthenticationResult result) {
+            public void onAuthenticationSucceeded(@NonNull androidx.biometric.BiometricPrompt.AuthenticationResult result) {
                 super.onAuthenticationSucceeded(result);
 
                 Toast.makeText(getApplicationContext(), "Authentication succeeded!", Toast.LENGTH_SHORT).show();
-               ;
+                initalizeApp();
             }
 
             @Override
@@ -98,63 +99,60 @@ public class MainActivity extends AppCompatActivity {
                 .setAllowedAuthenticators(BiometricManager.Authenticators.BIOMETRIC_STRONG | BiometricManager.Authenticators.DEVICE_CREDENTIAL)
                 .build();
 
-
         biometricPrompt.authenticate(promptInfo);
     }
 
 
-            public void initalizeApp() {
+    public void initalizeApp() {
 
 
-                Intent getHomeIntent = new Intent();
-                String gethomeintentextra = getHomeIntent.getStringExtra("username");
+        Intent getHomeIntent = new Intent();
+        String gethomeintentextra = getHomeIntent.getStringExtra("username");
 
-                addfab1 = findViewById(R.id.addexfab);
-                modefab2 = findViewById(R.id.modeexfab);
-                filefab3 = findViewById(R.id.filesfab3);
-                mainmt = findViewById(R.id.toolbar);
-                mainmt.addMenuProvider(new MenuProvider() {
-                    @Override
-                    public void onCreateMenu(@NonNull Menu menu, @NonNull MenuInflater menuInflater) {
-                        // THIS IS THE MISSING PIECE:
-                        // Inflate your menu resource file.
-                        // Replace 'R.menu.main_menu' with the actual name of your menu file if it's different.
-                        menuInflater.inflate(R.menu.toolbar_menu, menu);
-                    }
+        addfab1 = findViewById(R.id.addexfab);
+        modefab2 = findViewById(R.id.modeexfab);
+        filefab3 = findViewById(R.id.filesfab3);
+        mainmt = findViewById(R.id.toolbar);
+        mainmt.addMenuProvider(new MenuProvider() {
+            @Override
+            public void onCreateMenu(@NonNull Menu menu, @NonNull MenuInflater menuInflater) {
 
-                    @Override
-                    public boolean onMenuItemSelected(@NonNull MenuItem menuItem) {
-                        // Your click handling logic here is correct.
-                        if (menuItem.getItemId() == R.id.action_settings) {
-                            Intent settingsintent = new Intent(MainActivity.this, settingsactivty.class);
-                            startActivity(settingsintent);
-                            return true; // We handled the menu item click
-                        }
-                        return false; // We did not handle the menu item click
-                    }
-                }, MainActivity.this, Lifecycle.State.RESUMED);
-
-
-                addfab1.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent addintent = new Intent(MainActivity.this, addandmanagepage.class);
-                        startActivity(addintent);
-
-
-                    }
-                });
-                modefab2.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent intent = new Intent(MainActivity.this, appmode.class);
-                        startActivity(intent);
-
-
-                    }
-                });
+                menuInflater.inflate(R.menu.toolbar_menu, menu);
             }
-        }
+
+            @Override
+            public boolean onMenuItemSelected(@NonNull MenuItem menuItem) {
+
+                if (menuItem.getItemId() == R.id.action_settings) {
+                    Intent settingsintent = new Intent(MainActivity.this, settingsactivty.class);
+                    startActivity(settingsintent);
+                    return true;
+                }
+                return false;
+            }
+        }, MainActivity.this, Lifecycle.State.RESUMED);
+
+
+        addfab1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent addintent = new Intent(MainActivity.this, addandmanagepage.class);
+                startActivity(addintent);
+
+
+            }
+        });
+        modefab2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, appmode.class);
+                startActivity(intent);
+
+
+            }
+        });
+    }
+}
 
 
 

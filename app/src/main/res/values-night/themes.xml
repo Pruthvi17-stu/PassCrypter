@@ -1,6 +1,13 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
 
+    <!-- All content now lives inside this single 'resources' block -->
 
-            <style name="Theme.Passcrypter" parent="Base.Theme.Passcrypter" />
-        </resources>
+    <style name="Base.Theme.Passcrypter" parent="Theme.Material3.Dark.NoActionBar"/>
 
+
+
+
+
+    <style name="Theme.Passcrypter" parent="Base.Theme.Passcrypter" />
+
+</resources>

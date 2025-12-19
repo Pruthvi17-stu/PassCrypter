@@ -9,6 +9,7 @@
     tools:context=".MainActivity"
     android:background="@color/white"
     android:padding="10dp"
+
     >
 
     <com.google.android.material.appbar.MaterialToolbar

@@ -1,18 +1,21 @@
 package com.example.passcrypter;
 
+
+
 import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.view.View;
-import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.activity.EdgeToEdge;
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.biometric.BiometricManager;
 
 
 public class appmode extends AppCompatActivity {
@@ -53,32 +56,33 @@ public class appmode extends AppCompatActivity {
     }
     public void setuplisteners()
     {
-        normalmode.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(@NonNull CompoundButton buttonView, boolean isChecked) {
-                if(isChecked)
-                {
-                    seriousmode.setChecked(false);
-                    savemode(false);
-                    updateCurrentappmodetext(false);
-                    Toast.makeText(appmode.this, "Normal Mode activitated", Toast.LENGTH_SHORT).show();
+        normalmode.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if(isChecked)
+            {
+                seriousmode.setChecked(false);
+                savemode(false);
+                updateCurrentappmodetext(false);
+                Toast.makeText(appmode.this, "Normal Mode activitated", Toast.LENGTH_SHORT).show();
 
 
-                }
             }
         });
-        seriousmode.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        seriousmode.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if(isChecked)
+            {
+               showSeriousModeConfirmationDialog();
+            }
+            else {
+                normalmode.setChecked(true);
+
+
+            }
+        });
+        backarrow.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onCheckedChanged(@NonNull CompoundButton buttonView, boolean isChecked) {
-                if(isChecked)
-                {
-                   showSeriousModeConfirmationDialog();
-                }
-                else {
-                    normalmode.setChecked(true);
-
-
-                }
+            public void onClick(View v) {
+                Intent intent = new Intent(appmode.this, MainActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -91,9 +95,7 @@ public class appmode extends AppCompatActivity {
         {
             currentappmode.setText("Current text:Serious Mode");
         }
-        else{
-            currentappmode.setText("Current text:Normal Mode");
-
+        else{currentappmode.setText("Current text:Normal Mode");
         }
 
     }
@@ -106,29 +108,43 @@ public class appmode extends AppCompatActivity {
     }
 
     private void showSeriousModeConfirmationDialog() {
+        BiometricManager biometrics =BiometricManager.from(appmode.this);
+        int availableauthenticator=BiometricManager.Authenticators.BIOMETRIC_STRONG|BiometricManager.Authenticators.DEVICE_CREDENTIAL ;
+        int result=biometrics.canAuthenticate(availableauthenticator);
+        if (result == BiometricManager.BIOMETRIC_ERROR_NONE_ENROLLED) {
+
+            new AlertDialog.Builder(this)
+                    .setTitle("Screen Lock Required")
+                    .setMessage("To use Serious Mode, you must first set up a screen lock (like a PIN or password). Would you like to set one up now?")
+                    .setPositiveButton("Yes, Go to Settings", (dialog, which) -> {
+                        Intent intent = new Intent(Settings.ACTION_SECURITY_SETTINGS);
+                        startActivity(intent);
+                        seriousmode.setChecked(false);
+                    })
+                    .setNegativeButton("Cancel", (dialog, which) -> {
+                        seriousmode.setChecked(false);
+                    })
+                    .setCancelable(false)
+                    .show();
+            return;
+        }
         new AlertDialog.Builder(this)
                 .setTitle("Enable Serious Mode?")
                 .setMessage("The app will require authentication every time it is opened. Are you sure?")
                 .setPositiveButton("Yes, Enable", (dialog, which) -> {
-                    // User confirmed. Complete the action.
+
                     normalmode.setChecked(false);
                     savemode(true);
                     updateCurrentappmodetext(true);
                     Toast.makeText(this, "Serious Mode Activated", Toast.LENGTH_SHORT).show();
                 })
                 .setNegativeButton("Cancel", (dialog, which) -> {
-                    // User canceled. Revert the switch to the off position.
+
                     seriousmode.setChecked(false);
                 })
                 .setCancelable(false)
                 .show();
-        backarrow.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(appmode.this, MainActivity.class);
-                startActivity(intent);
-            }
-        });
+
     }
 }
 
