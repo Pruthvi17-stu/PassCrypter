@@ -26,12 +26,14 @@ import androidx.lifecycle.Lifecycle;
 
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 
 public class MainActivity extends AppCompatActivity {
     ExtendedFloatingActionButton addfab1;
     ExtendedFloatingActionButton modefab2;
     ExtendedFloatingActionButton filefab3;
+    FloatingActionButton addpasswordfab4;
     MaterialToolbar mainmt;
 
     private java.util.concurrent.Executor executor;
@@ -54,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
         });
         SharedPreferences spf = getSharedPreferences(appmode.Prefs_name, MODE_PRIVATE);
         boolean isSeriousModeOn = spf.getBoolean(appmode.KEY_MODE, false);
-        isSeriousModeOn=false;
+       isSeriousModeOn=false;
         if (isSeriousModeOn) {
             setupAndShowBiometricPrompt();
 
@@ -113,6 +115,7 @@ public class MainActivity extends AppCompatActivity {
         modefab2 = findViewById(R.id.modeexfab);
         filefab3 = findViewById(R.id.filesfab3);
         mainmt = findViewById(R.id.toolbar);
+        addpasswordfab4=findViewById(R.id.fab1);
         mainmt.addMenuProvider(new MenuProvider() {
             @Override
             public void onCreateMenu(@NonNull Menu menu, @NonNull MenuInflater menuInflater) {
@@ -151,6 +154,15 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+        addpasswordfab4.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, addpasswordactvity.class);
+                startActivity(intent);
+
+            }
+        });
+
     }
 }
 

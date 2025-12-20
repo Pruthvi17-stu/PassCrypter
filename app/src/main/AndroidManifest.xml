@@ -27,6 +27,11 @@
             android:exported="false" />
         <activity android:name=".Loginmodulebackend"
             android:exported="false" />
+        <activity android:name=".appmode"
+            android:exported="false"/>
+        <activity android:name=".addpasswordactvity"
+            android:exported="false"/>
+
 
 
     </application>
