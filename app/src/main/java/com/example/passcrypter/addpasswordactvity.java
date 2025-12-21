@@ -1,6 +1,6 @@
 package com.example.passcrypter;
 
-import android.content.Intent;
+
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -57,9 +57,9 @@ public class addpasswordactvity extends AppCompatActivity {
 }
 private void savepassword()
 {
-    String accountName= Objects.requireNonNull(Objects.requireNonNull(accountname.getText()).toString());
-    String userName=Objects.requireNonNull(Objects.requireNonNull(username.getText()).toString());
-    String Password=Objects.requireNonNull(Objects.requireNonNull(password.getText()).toString());
+    String accountName= Objects.requireNonNull(accountname.getText()).toString().trim();
+    String userName=Objects.requireNonNull(username.getText()).toString().trim();
+    String Password=Objects.requireNonNull(password.getText()).toString().trim();
     String selectLogoname= logoSpinner.getSelectedItem().toString();
     if(accountName.isEmpty()||userName.isEmpty()||Password.isEmpty()){
         Toast.makeText(this, "Fill all the fields", Toast.LENGTH_SHORT).show();
