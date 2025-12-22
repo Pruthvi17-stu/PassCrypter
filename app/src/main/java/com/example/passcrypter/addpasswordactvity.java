@@ -67,7 +67,23 @@ private void savepassword()
     }
     String confirmationmessage="Account Name: "+accountName+""+"Username: "+userName+""+"Password: "+Password+""+"App Logo: "+selectLogoname;
     Toast.makeText(this, confirmationmessage, Toast.LENGTH_SHORT).show();
-}
+    final PasswordEntryValDefinition newEntry = new PasswordEntryValDefinition(accountName,userName,Password,selectLogoname);
+    final AppDatabase db=AppDatabase.getDatbase(this);
 
+    new Thread(new Runnable() {
+        @Override
+        public void run() {
+            db.dataManager().insert(newEntry);
+
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    Toast.makeText(getApplicationContext(), "Saved", Toast.LENGTH_SHORT);
+                }
+            });
+        }
+    }).start();
+    finish();
+}
 
 }

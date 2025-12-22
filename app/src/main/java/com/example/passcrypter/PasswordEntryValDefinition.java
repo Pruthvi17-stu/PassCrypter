@@ -3,6 +3,9 @@ package com.example.passcrypter;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
+
+import com.google.android.material.textfield.TextInputEditText;
+
 @Entity(tableName = "PasswordEntry_Value_Definition")
 public class PasswordEntryValDefinition {
     @PrimaryKey(autoGenerate = true)
@@ -16,7 +19,7 @@ public class PasswordEntryValDefinition {
     @ColumnInfo(name="logo")
         public String logo;
 
-    public PasswordEntryValDefinition( String accountName, String username, String password, String logo) {
+    public PasswordEntryValDefinition(String accountName, String username, String password, String logo) {
 
         this.accountName = accountName;
         this.username = username;

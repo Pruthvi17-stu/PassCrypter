@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 
@@ -27,6 +28,12 @@ import androidx.lifecycle.Lifecycle;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.List;
+import java.util.ListIterator;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -56,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
         });
         SharedPreferences spf = getSharedPreferences(appmode.Prefs_name, MODE_PRIVATE);
         boolean isSeriousModeOn = spf.getBoolean(appmode.KEY_MODE, false);
-       isSeriousModeOn=false;
+
         if (isSeriousModeOn) {
             setupAndShowBiometricPrompt();
 
@@ -64,6 +71,27 @@ public class MainActivity extends AppCompatActivity {
             initalizeApp();
         }
     }
+    /*@Override
+    public  void OnResume(){
+        super.OnResume();
+        loadPasswordentries();
+    }*/
+   /* private void loadPasswordentries() {
+        new Thread(new Runnable(){
+            @Override
+            public void run() {
+                final List<PasswordEntryValDefinition> entries = db.dataManager().getAllEntries() ;
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+
+                    }
+        }).start();
+
+    }*/
+
+
+
 
     private void setupAndShowBiometricPrompt() {
         executor = ContextCompat.getMainExecutor(this);
