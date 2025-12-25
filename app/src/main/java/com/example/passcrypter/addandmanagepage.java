@@ -14,32 +14,56 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class addandmanagepage extends AppCompatActivity {
-   RecyclerView passwordrv;
+
     PasswordAdapter adapter;
+    // Variables for this screen
+    private AppDatabase db;
+    private RecyclerView recyclerView;
+    private PasswordAdapter passwordAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
+
         setContentView(R.layout.addandmanagepage);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.addandmanage), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-
             return insets;
-
         });
-        passwordrv=findViewById(R.id.recyclerview);
-        List<PasswordEntry> passwordEntries=new ArrayList<PasswordEntry>();
-        passwordEntries.add(new PasswordEntry("Instagram","123instagram",R.drawable.instagram));
-        passwordEntries.add(new PasswordEntry("Google","123google",R.drawable.google));
-        passwordEntries.add(new PasswordEntry("spotify","123facebook",R.drawable.spotify));
-        passwordrv.setLayoutManager(new LinearLayoutManager(addandmanagepage.this));
-        passwordrv.setAdapter(new PasswordAdapter(addandmanagepage.this,passwordEntries));
+        db = AppDatabase.getDatbase(this);
+        recyclerView = findViewById(R.id.recyclerview);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
 
 
 
 
     }
+@Override
+    protected void onResume() {
+        super.onResume();
+
+        loadPasswordEntries();
+    }
+
+    public void loadPasswordEntries() {
+
+        new Thread(() -> {
+
+            final List<PasswordEntryValDefinition> entries = db.dataManager().getAllEntries();
+
+
+            runOnUiThread(() -> {
+
+                passwordAdapter = new PasswordAdapter(entries);
+                recyclerView.setAdapter(passwordAdapter);
+            });
+        }).start();
+    }
 }
+
+
+
+

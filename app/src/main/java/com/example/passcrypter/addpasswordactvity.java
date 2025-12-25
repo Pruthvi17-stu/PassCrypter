@@ -1,6 +1,7 @@
 package com.example.passcrypter;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -43,6 +44,8 @@ public class addpasswordactvity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 savepassword();
+                Intent intent= new Intent(addpasswordactvity.this, addandmanagepage.class);
+                startActivity(intent);
             }
     });
         backarrow.setOnClickListener(new View.OnClickListener(){
@@ -68,6 +71,10 @@ private void savepassword()
     String confirmationmessage="Account Name: "+accountName+""+"Username: "+userName+""+"Password: "+Password+""+"App Logo: "+selectLogoname;
     Toast.makeText(this, confirmationmessage, Toast.LENGTH_SHORT).show();
     final PasswordEntryValDefinition newEntry = new PasswordEntryValDefinition(accountName,userName,Password,selectLogoname);
+    newEntry.setAccountName(accountName);
+    newEntry.setUsername(userName);
+    newEntry.setPassword(Password);
+    newEntry.setLogo(selectLogoname);
     final AppDatabase db=AppDatabase.getDatbase(this);
 
     new Thread(new Runnable() {
@@ -79,11 +86,12 @@ private void savepassword()
                 @Override
                 public void run() {
                     Toast.makeText(getApplicationContext(), "Saved", Toast.LENGTH_SHORT);
+                    finish();
                 }
             });
         }
     }).start();
-    finish();
+
 }
 
 }

@@ -4,7 +4,7 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-import com.google.android.material.textfield.TextInputEditText;
+
 
 @Entity(tableName = "PasswordEntry_Value_Definition")
 public class PasswordEntryValDefinition {

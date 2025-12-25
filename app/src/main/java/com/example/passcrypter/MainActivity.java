@@ -23,6 +23,8 @@ import androidx.core.view.MenuProvider;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.lifecycle.Lifecycle;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 
 import com.google.android.material.appbar.MaterialToolbar;
@@ -49,11 +51,14 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
+
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
@@ -71,24 +76,8 @@ public class MainActivity extends AppCompatActivity {
             initalizeApp();
         }
     }
-    /*@Override
-    public  void OnResume(){
-        super.OnResume();
-        loadPasswordentries();
-    }*/
-   /* private void loadPasswordentries() {
-        new Thread(new Runnable(){
-            @Override
-            public void run() {
-                final List<PasswordEntryValDefinition> entries = db.dataManager().getAllEntries() ;
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
 
-                    }
-        }).start();
 
-    }*/
 
 
 
