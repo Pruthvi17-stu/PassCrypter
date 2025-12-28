@@ -1,8 +1,12 @@
 package com.example.passcrypter;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.UiThread;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -20,6 +24,7 @@ public class addandmanagepage extends AppCompatActivity {
     private AppDatabase db;
     private RecyclerView recyclerView;
     private PasswordAdapter passwordAdapter;
+    Button clearbtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,12 +40,30 @@ public class addandmanagepage extends AppCompatActivity {
         db = AppDatabase.getDatbase(this);
         recyclerView = findViewById(R.id.recyclerview);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        clearbtn = findViewById(R.id.clear_all_button);
+        clearbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
 
 
+                new Thread(() -> {
 
+
+                    db.dataManager().deleteAll();
+
+
+                    runOnUiThread(() -> {
+                        Toast.makeText(addandmanagepage.this, "All records cleared", Toast.LENGTH_SHORT).show();
+                        loadPasswordEntries();
+                    });
+
+                }).start();
+            }
+        });
 
     }
+
 @Override
     protected void onResume() {
         super.onResume();

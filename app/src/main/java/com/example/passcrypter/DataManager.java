@@ -14,5 +14,8 @@ public interface DataManager {
     @Query("SELECT * FROM PasswordEntry_Value_Definition ORDER BY account_name ASC")
     List<PasswordEntryValDefinition> getAllEntries();
 
+    @Query("Delete from PasswordEntry_Value_Definition ")
+    void deleteAll();
+
 
 }

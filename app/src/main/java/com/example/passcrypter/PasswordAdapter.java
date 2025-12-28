@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -56,8 +57,50 @@ public class PasswordAdapter extends RecyclerView.Adapter<PasswordAdapter.Passwo
 
             if (databaseEntries != null) {
                 PasswordEntryValDefinition currentEntry = databaseEntries.get(position);
-                holder.accountNameTextView.setText(currentEntry.getAccountName());
-                holder.usernameTextView.setText(currentEntry.getUsername());
+               String Maintitle=currentEntry.getAccountName()+"("+currentEntry.getUsername()+")";
+               holder.accountNameTextView.setText(Maintitle);
+               String realpassword=currentEntry.getPassword();
+               StringBuilder maskedPassword=new StringBuilder();
+               for(int i=0;i<realpassword.length();i++){
+                   maskedPassword.append("*");
+               }
+               if(realpassword.length()>16){
+                   holder.usernameTextView.setText("*******");
+               }
+               else{
+                   holder.usernameTextView.setText(maskedPassword);
+               }
+               String logo=currentEntry.getLogo().toLowerCase();
+                switch(logo){
+                    case "default":
+                        holder.logoImageView.setImageResource(R.drawable.add);
+                        break;
+                    case "Google":
+                        holder.logoImageView.setImageResource(R.drawable.google);
+                        break;
+                    case "Instagram":
+                        holder.logoImageView.setImageResource(R.drawable.instagram);
+                        break;
+                    case "github":
+                        holder.logoImageView.setImageResource(R.drawable.github);
+                        break;
+                        case "facebook":
+                        holder.logoImageView.setImageResource(R.drawable.facebook);
+                        break;
+                        case "x":
+                        holder.logoImageView.setImageResource(R.drawable.x);
+                        break;
+                      case "Spotify":
+                        holder.logoImageView.setImageResource(R.drawable.spotify);
+                        break;
+                        case "other":
+                        holder.logoImageView.setImageResource(R.drawable.otherapp);
+                        break;
+                    default:
+                        holder.logoImageView.setImageResource(R.drawable.add);
+
+                }
+
 
 
             }

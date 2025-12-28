@@ -35,7 +35,7 @@ public class addpasswordactvity extends AppCompatActivity {
         logoSpinner=findViewById(R.id.logo_spinner);
         savebutton=findViewById(R.id.save_button);
         backarrow=findViewById(R.id.back_arrowadd);
-        String[] appnames={"Default","Google","Instagram","Facebook","X","Other"};
+        String[] appnames={"Default","Google","Instagram","Facebook","X","github","Spotify","Other"};
         //To display a list of items in appnames
         ArrayAdapter<String> adapter=new ArrayAdapter<>(this,android.R.layout.simple_spinner_item,appnames);
         adapter.setDropDownViewResource(androidx.appcompat.R.layout.support_simple_spinner_dropdown_item);
