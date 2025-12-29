@@ -1,5 +1,9 @@
 package com.example.passcrypter;
 
+import static android.app.ProgressDialog.show;
+
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,8 +11,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.math.BigInteger;
@@ -69,16 +75,17 @@ public class PasswordAdapter extends RecyclerView.Adapter<PasswordAdapter.Passwo
                }
                else{
                    holder.usernameTextView.setText(maskedPassword);
+
                }
                String logo=currentEntry.getLogo().toLowerCase();
                 switch(logo){
                     case "default":
                         holder.logoImageView.setImageResource(R.drawable.add);
                         break;
-                    case "Google":
+                    case "google":
                         holder.logoImageView.setImageResource(R.drawable.google);
                         break;
-                    case "Instagram":
+                    case "instagram":
                         holder.logoImageView.setImageResource(R.drawable.instagram);
                         break;
                     case "github":
@@ -90,7 +97,7 @@ public class PasswordAdapter extends RecyclerView.Adapter<PasswordAdapter.Passwo
                         case "x":
                         holder.logoImageView.setImageResource(R.drawable.x);
                         break;
-                      case "Spotify":
+                      case "spotify":
                         holder.logoImageView.setImageResource(R.drawable.spotify);
                         break;
                         case "other":
@@ -100,12 +107,31 @@ public class PasswordAdapter extends RecyclerView.Adapter<PasswordAdapter.Passwo
                         holder.logoImageView.setImageResource(R.drawable.add);
 
                 }
+                holder.itemView.setOnClickListener(v -> {
+                    Context context=v.getContext();
+                    new AlertDialog.Builder(context)
+                            .setTitle("View Password")
+                            .setMessage("View the password for " + currentEntry.getAccountName() + "?")
+                            .setPositiveButton("Yes", (dialog, which) -> {
 
+                                new AlertDialog.Builder(context)
+                                        .setTitle("Password for " + currentEntry.getAccountName())
+                                        .setMessage("Password: \n\n"+realpassword)
+                                        .setPositiveButton("OK", null)
+                                        .setNeutralButton("Copy", (dialog1, which1) ->{
+                                            ClipboardManager clipboard=(ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
+                                            ClipData clip =ClipData.newPlainText("Password",realpassword);
+                                            clipboard.setPrimaryClip(clip);
+                                            Toast.makeText(context, "Password copied", Toast.LENGTH_SHORT).show();
+                                        })
+                                        .show();
+                            })
+                            .setNegativeButton("No", null)
+                            .show();
 
-
+                });
             }
         }
-
         @Override
         public int getItemCount() {
 

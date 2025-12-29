@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
 
-    <style name="Base.Theme.Passcrypter" parent="Theme.Material3.Dark.NoActionBar"/>
+    <style name="Base.Theme.Passcrypter" parent="Theme.Material3.Light.NoActionBar"/>
 
 
     <style name="Theme.Passcrypter" parent="Base.Theme.Passcrypter" />
