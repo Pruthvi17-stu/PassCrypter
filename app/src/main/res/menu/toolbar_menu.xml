@@ -3,11 +3,25 @@
     <menu xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <item
+        android:title="More"
+        android:icon="@drawable/settings"
+        android:id="@+id/action_more"
+        app:showAsAction="ifRoom">
+        <menu>
+
         <item
             android:id="@+id/action_settings"
             android:title="Settings"
-            android:icon="@drawable/settings"
-            app:showAsAction="ifRoom" />
-
-    </menu>
+            android:icon="@drawable/gears"
+            app:showAsAction="never" />
+            <item
+                android:title="Help"
+                android:icon="@drawable/help"
+                android:id="@+id/action_help"
+                app:showAsAction="never"
+                />
+        </menu>
+    </item>
+</menu>
 

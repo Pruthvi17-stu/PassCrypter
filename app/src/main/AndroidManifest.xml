@@ -31,6 +31,8 @@
             android:exported="false"/>
         <activity android:name=".addpasswordactvity"
             android:exported="false"/>
+        <activity android:name=".HelpActivity"
+            android:exported="false"/>
 
 
 

@@ -148,6 +148,11 @@ public class MainActivity extends AppCompatActivity {
                     startActivity(settingsintent);
                     return true;
                 }
+                if(menuItem.getItemId()==R.id.action_help)
+                {
+                    Intent helpintent=new Intent(MainActivity.this, HelpActivity.class);
+                    startActivity(helpintent);
+                }
                 return false;
             }
         }, MainActivity.this, Lifecycle.State.RESUMED);
