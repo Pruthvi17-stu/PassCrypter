@@ -26,70 +26,49 @@
         android:id="@+id/fab1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/filesfab3"
+        android:layout_below="@id/modeexfab"
+
         android:layout_marginLeft="310dp"
-        android:layout_marginTop="17dp"
+        android:layout_marginTop="50dp"
         android:src="@drawable/add"
         app:elevation="30dp"
         app:fabSize="auto" />
 
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/addexfab"
         android:layout_width="match_parent"
         android:layout_height="150dp"
+        android:layout_marginLeft="20dp"
         android:layout_marginTop="100dp"
         android:layout_marginRight="20dp"
-        android:layout_marginLeft="20dp"
-        android:textAlignment="textStart"
         android:text="Add And Manage"
+        android:textAlignment="textStart"
         android:textSize="18dp"
         app:elevation="30dp"
-        android:id="@+id/addexfab"
-        app:icon="@drawable/addbutton"
         app:iconGravity="textEnd"
         app:iconPadding="50dp"
         app:iconSize="100dp"
-        app:iconTintMode="add"
         app:iconTint="@android:color/transparent"
+        app:iconTintMode="add"
 
         />
+
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/modeexfab"
         android:layout_width="match_parent"
         android:layout_height="150dp"
         android:layout_below="@id/addexfab"
-        android:layout_marginTop="25dp"
         android:layout_marginLeft="20dp"
+        android:layout_marginTop="50dp"
         android:layout_marginRight="20dp"
         android:text="Select App mode"
-        android:textSize="18dp"
         android:textAlignment="textStart"
-        android:id="@+id/modeexfab"
+        android:textSize="18dp"
         app:elevation="30dp"
         app:iconGravity="textEnd"
         app:iconSize="75dp"
-        app:iconTintMode="add"
         app:iconTint="@android:color/transparent"
-        />
-    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-        android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:layout_below="@id/modeexfab"
-        android:layout_marginTop="25dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:text="Encrypt Files"
-        android:textAlignment="textStart"
-        android:textSize="18dp"
-        app:icon="@drawable/safefiles"
-        app:iconGravity="textEnd"
-        app:iconPadding="75dp"
-        app:iconSize="100dp"
-        app:iconTintMode="add"
-        app:iconTint="@android:color/transparent"
-        android:id="@+id/filesfab3"
-        app:elevation="30dp"
-        />
-
-
+        app:iconTintMode="add" />
 
 
 </RelativeLayout>

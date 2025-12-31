@@ -41,10 +41,10 @@ dependencies {
         // For control over item selection of both touch and mouse driven selection
         implementation ("androidx.recyclerview:recyclerview-selection:1.2.0")
         implementation("androidx.biometric:biometric:1.2.0-alpha05")
+        //Dependency for the encryption system
+        implementation("androidx.security:security-crypto:1.1.0-alpha06")
+
     val room_version = "2.6.1" // Use a recent version of Room
-
-
-
     implementation ("androidx.room:room-runtime:$room_version")
     implementation(libs.support.annotations)
     annotationProcessor ("androidx.room:room-compiler:$room_version")

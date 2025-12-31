@@ -41,7 +41,7 @@ import java.util.ListIterator;
 public class MainActivity extends AppCompatActivity {
     ExtendedFloatingActionButton addfab1;
     ExtendedFloatingActionButton modefab2;
-    ExtendedFloatingActionButton filefab3;
+
     FloatingActionButton addpasswordfab4;
     MaterialToolbar mainmt;
 
@@ -130,7 +130,7 @@ public class MainActivity extends AppCompatActivity {
 
         addfab1 = findViewById(R.id.addexfab);
         modefab2 = findViewById(R.id.modeexfab);
-        filefab3 = findViewById(R.id.filesfab3);
+
         mainmt = findViewById(R.id.toolbar);
         addpasswordfab4=findViewById(R.id.fab1);
         mainmt.addMenuProvider(new MenuProvider() {
