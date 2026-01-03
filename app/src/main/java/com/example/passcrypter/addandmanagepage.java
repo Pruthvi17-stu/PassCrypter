@@ -14,6 +14,8 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.io.IOException;
+import java.security.GeneralSecurityException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,6 +27,7 @@ public class addandmanagepage extends AppCompatActivity {
     private RecyclerView recyclerView;
     private PasswordAdapter passwordAdapter;
     Button clearbtn;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +41,7 @@ public class addandmanagepage extends AppCompatActivity {
             return insets;
         });
         db = AppDatabase.getDatbase(this);
+
         recyclerView = findViewById(R.id.recyclerview);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         clearbtn = findViewById(R.id.clear_all_button);

@@ -15,6 +15,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.textfield.TextInputEditText;
 
+import java.io.IOException;
+import java.security.GeneralSecurityException;
 import java.util.Objects;
 
 public class addpasswordactvity extends AppCompatActivity {
@@ -23,6 +25,7 @@ public class addpasswordactvity extends AppCompatActivity {
 
     Button savebutton;
     ImageView backarrow;
+    private EncryptionImplementer encryptionImplementer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,44 +57,57 @@ public class addpasswordactvity extends AppCompatActivity {
                 finish();
             }
         });
+        try{
+            encryptionImplementer = new EncryptionImplementer(this);
+        }
+        catch (GeneralSecurityException | IOException e){
+            Toast.makeText(this, "Critical Security Error. Exiting.", Toast.LENGTH_SHORT).show();
+            e.printStackTrace();
+            finish();}
 
 
 
 }
-private void savepassword()
-{
-    String accountName= Objects.requireNonNull(accountname.getText()).toString().trim();
-    String userName=Objects.requireNonNull(username.getText()).toString().trim();
-    String Password=Objects.requireNonNull(password.getText()).toString().trim();
-    String selectLogoname= logoSpinner.getSelectedItem().toString();
-    if(accountName.isEmpty()||userName.isEmpty()||Password.isEmpty()){
+private void savepassword() {
+    String accountName = Objects.requireNonNull(accountname.getText()).toString().trim();
+    String userName = Objects.requireNonNull(username.getText()).toString().trim();
+    String plainTextPassword = Objects.requireNonNull(password.getText()).toString().trim();
+    String selectLogoname = logoSpinner.getSelectedItem().toString();
+    if (accountName.isEmpty() || userName.isEmpty() || plainTextPassword.isEmpty()) {
         Toast.makeText(this, "Fill all the fields", Toast.LENGTH_SHORT).show();
         return;
     }
-    String confirmationmessage="Account Name: "+accountName+""+"Username: "+userName+""+"Password: "+Password+""+"App Logo: "+selectLogoname;
+    String confirmationmessage = "Account Name: " + accountName + "" + "Username: " + userName + "" + "Password: " + plainTextPassword + "" + "App Logo: " + selectLogoname;
     Toast.makeText(this, confirmationmessage, Toast.LENGTH_SHORT).show();
-    final PasswordEntryValDefinition newEntry = new PasswordEntryValDefinition(accountName,userName,Password,selectLogoname);
-    newEntry.setAccountName(accountName);
-    newEntry.setUsername(userName);
-    newEntry.setPassword(Password);
-    newEntry.setLogo(selectLogoname);
-    final AppDatabase db=AppDatabase.getDatbase(this);
+    try {
+        String encryptedpassword=encryptionImplementer.encrypt(plainTextPassword);
+        final PasswordEntryValDefinition newEntry = new PasswordEntryValDefinition(accountName, userName, encryptedpassword, selectLogoname);
+//        newEntry.setAccountName(accountName);
+//        newEntry.setUsername(userName);
+//        newEntry.setPassword(plainTextPassword);
+//        newEntry.setLogo(selectLogoname);
+        final AppDatabase db = AppDatabase.getDatbase(this);
 
-    new Thread(new Runnable() {
-        @Override
-        public void run() {
-            db.dataManager().insert(newEntry);
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                db.dataManager().insert(newEntry);
 
-            runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    Toast.makeText(getApplicationContext(), "Saved", Toast.LENGTH_SHORT);
-                    finish();
-                }
-            });
-        }
-    }).start();
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(getApplicationContext(), "Saved", Toast.LENGTH_SHORT);
+                        finish();
+                    }
+                });
+            }
+        }).start();
 
+    } catch (GeneralSecurityException e) {
+        Toast.makeText(this, "Error.Could not save password", Toast.LENGTH_SHORT).show();
+        e.printStackTrace();
+
+    }
 }
 
 }
