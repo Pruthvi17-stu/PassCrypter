@@ -27,30 +27,77 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/modeexfab"
-
         android:layout_marginLeft="310dp"
         android:layout_marginTop="50dp"
         android:src="@drawable/add"
         app:elevation="30dp"
         app:fabSize="auto" />
 
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/strength_card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/toolbar"
+        android:layout_marginTop="24dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="4dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/progres_bar"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <TextView
+                android:id="@+id/strength_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Password Strength"
+                android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
+                android:textColor="@color/white"
+                android:textColorHighlight="@color/white" />
+
+            <TextView
+                android:id="@+id/strength_description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="Calculating..."
+                android:textAppearance="@style/TextAppearance.Material3.BodySmall"
+                android:textColor="@color/white" />
+
+            <com.google.android.material.progressindicator.LinearProgressIndicator
+                android:id="@+id/strength_progress_bar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:progress="0"
+                app:indicatorColor="@color/black"
+                app:trackCornerRadius="8dp" />
+
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
         android:id="@+id/addexfab"
         android:layout_width="match_parent"
         android:layout_height="150dp"
         android:layout_marginLeft="20dp"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="50dp"
         android:layout_marginRight="20dp"
         android:text="Add And Manage"
         android:textAlignment="textStart"
         android:textSize="18dp"
         app:elevation="30dp"
+        app:icon="@drawable/outline_arrow_forward_ios_24"
         app:iconGravity="textEnd"
-        app:iconPadding="50dp"
-        app:iconSize="100dp"
-        app:iconTint="@android:color/transparent"
-        app:iconTintMode="add"
-
+        app:iconPadding="150dp"
+        android:layout_below="@id/strength_card"
         />
 
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
@@ -65,10 +112,10 @@
         android:textAlignment="textStart"
         android:textSize="18dp"
         app:elevation="30dp"
+        app:icon="@drawable/outline_arrow_forward_ios_24"
         app:iconGravity="textEnd"
-        app:iconSize="75dp"
-        app:iconTint="@android:color/transparent"
-        app:iconTintMode="add" />
+        app:iconPadding="150dp"
+        />
 
 
 </RelativeLayout>

@@ -46,9 +46,16 @@ public class addpasswordactvity extends AppCompatActivity {
         savebutton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                savepassword();
-                Intent intent= new Intent(addpasswordactvity.this, addandmanagepage.class);
-                startActivity(intent);
+                if (accountname.getText().toString().isEmpty() || username.getText().toString().isEmpty() || password.getText().toString().isEmpty()||logoSpinner.getSelectedItem().toString().isEmpty())
+                {
+                    Toast.makeText(addpasswordactvity.this, "Fill all the fields", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                else {
+                    savepassword();
+                    Intent intent = new Intent(addpasswordactvity.this, addandmanagepage.class);
+                    startActivity(intent);
+                }
             }
     });
         backarrow.setOnClickListener(new View.OnClickListener(){
