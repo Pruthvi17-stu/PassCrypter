@@ -86,11 +86,8 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(this, "Cannot Check Password Strength.", Toast.LENGTH_SHORT).show();
             return;
         }
-
         strengthprogress=findViewById(R.id.strength_progress_bar);
         strengthdescript=findViewById(R.id.strength_description);
-
-
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
@@ -113,13 +110,13 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        // Always analyze passwords when the screen becomes visible
+
         passwordanalyzer();
     }
 
-    // --- FULLY CORRECTED PASSWORD ANALYZER METHOD ---
+
     public void passwordanalyzer() {
-        // 1. START A NEW BACKGROUND THREAD to handle database and decryption
+
         new Thread(() -> {
             List<PasswordEntryValDefinition> allEntries = db.dataManager().getAllEntries();
 
@@ -134,15 +131,15 @@ public class MainActivity extends AppCompatActivity {
 
             int weakPasswordCount = 0;
             for (PasswordEntryValDefinition entry : allEntries) {
-                // 2. USE A TRY-CATCH BLOCK for decryption
+
                 try {
-                    // 3. USE CORRECT METHOD NAME: decrypt()
+
                     String decryptedPassword = encryptionImplementer.decryptedkey(entry.getPassword());
                     if (isPasswordWeak(decryptedPassword)) {
                         weakPasswordCount++;
                     }
                 } catch (GeneralSecurityException e) {
-                    // Log error but don't crash the app
+
                     e.printStackTrace();
                 }
             }
@@ -150,10 +147,10 @@ public class MainActivity extends AppCompatActivity {
             int totalPasswords = allEntries.size();
             int weakPercentage = (int) (((double) weakPasswordCount / totalPasswords) * 100);
 
-            // Create final variables for use inside the lambda
+
             final int finalWeakCount = weakPasswordCount;
 
-            // 4. UPDATE THE UI ON THE MAIN THREAD
+
             runOnUiThread(() -> {
                 strengthdescript.setText(finalWeakCount + " out of " + totalPasswords + " passwords are weak");
                 strengthprogress.setProgress(weakPercentage, true);
@@ -166,7 +163,7 @@ public class MainActivity extends AppCompatActivity {
                     strengthprogress.setIndicatorColor(ContextCompat.getColor(this, android.R.color.holo_red_dark)); // Many weak
                 }
             });
-        }).start(); // 5. THIS .start() CALL NOW CORRECTLY APPLIES TO THE NEW THREAD
+        }).start();
     }
     public boolean isPasswordWeak(String password){
         if (password == null || password.length() < 8) {
@@ -247,23 +244,29 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onCreateMenu(@NonNull Menu menu, @NonNull MenuInflater menuInflater) {
 
-                menuInflater.inflate(R.menu.toolbar_menu, menu);
+                //menuInflater.inflate(R.menu.toolbar_menu, menu);
+                menu.add(0,1,0,"Settings");
+                menu.add(0,2,1,"help");
             }
 
             @Override
             public boolean onMenuItemSelected(@NonNull MenuItem menuItem) {
 
-                if (menuItem.getItemId() == R.id.action_settings) {
+                int itemId= menuItem.getItemId();
+                if(itemId ==1) {
                     Intent settingsintent = new Intent(MainActivity.this, settingsactivty.class);
                     startActivity(settingsintent);
                     return true;
                 }
-                if(menuItem.getItemId()==R.id.action_help)
-                {
-                    Intent helpintent=new Intent(MainActivity.this, HelpActivity.class);
-                    startActivity(helpintent);
-                }
+                    if (itemId==2){
+                        Intent helpintent= new Intent(MainActivity.this, HelpActivity.class);
+                        startActivity(helpintent);
+                        return true;
+                    }
+
+
                 return false;
+
             }
         }, MainActivity.this, Lifecycle.State.RESUMED);
 

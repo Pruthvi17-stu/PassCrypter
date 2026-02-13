@@ -50,7 +50,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Normal Mode"
+                android:text="Unprotected mode "
                 android:textAppearance="?attr/textAppearanceHeadline6" />
 
             <TextView
@@ -89,7 +89,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Serious Mode"
+                android:text="Secure Mode"
                 android:textAppearance="?attr/textAppearanceHeadline6"
                 android:id="@+id/smtv"
                  />

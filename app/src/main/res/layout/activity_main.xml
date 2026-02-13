@@ -108,7 +108,7 @@
         android:layout_marginLeft="20dp"
         android:layout_marginTop="50dp"
         android:layout_marginRight="20dp"
-        android:text="Select App mode"
+        android:text="Select Security mode"
         android:textAlignment="textStart"
         android:textSize="18dp"
         app:elevation="30dp"
