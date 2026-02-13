@@ -18,6 +18,16 @@ public class PasswordEntryValDefinition {
         public String password;
     @ColumnInfo(name="logo")
         public String logo;
+    @ColumnInfo(name="Change_count")
+        public int changecount;
+
+    public int getChangecount() {
+        return changecount;
+    }
+
+    public void setChangecount(int changecount) {
+        this.changecount = changecount;
+    }
 
     public PasswordEntryValDefinition(String accountName, String username, String password, String logo) {
 

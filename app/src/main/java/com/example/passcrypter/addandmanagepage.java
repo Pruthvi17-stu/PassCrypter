@@ -48,23 +48,22 @@ public class addandmanagepage extends AppCompatActivity {
         clearbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (recyclerView.getTouchables().isEmpty()) {
+                    Toast.makeText(addandmanagepage.this, "No records to clear", Toast.LENGTH_SHORT).show();
+                    return;
+                } else {
+                    new Thread(() -> {
+                        db.dataManager().deleteAll();
+                        runOnUiThread(() -> {
+                            Toast.makeText(addandmanagepage.this, "All records cleared", Toast.LENGTH_SHORT).show();
+                            loadPasswordEntries();
+                        });
 
-
-
-                new Thread(() -> {
-
-
-                    db.dataManager().deleteAll();
-
-
-                    runOnUiThread(() -> {
-                        Toast.makeText(addandmanagepage.this, "All records cleared", Toast.LENGTH_SHORT).show();
-                        loadPasswordEntries();
-                    });
-
-                }).start();
+                    }).start();
+                }
             }
         });
+
 
     }
 
@@ -90,6 +89,7 @@ public class addandmanagepage extends AppCompatActivity {
         }).start();
     }
 }
+
 
 
 

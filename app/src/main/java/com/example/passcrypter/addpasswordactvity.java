@@ -68,7 +68,7 @@ public class addpasswordactvity extends AppCompatActivity {
             encryptionImplementer = new EncryptionImplementer(this);
         }
         catch (GeneralSecurityException | IOException e){
-            Toast.makeText(this, "Critical Security Error. Exiting.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, " Security Error. Exiting.", Toast.LENGTH_SHORT).show();
             e.printStackTrace();
             finish();}
 

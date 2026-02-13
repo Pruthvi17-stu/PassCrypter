@@ -6,7 +6,7 @@ import androidx.room.Database;
 import androidx.room.RoomDatabase;
 import androidx.room.Room;
 
-@Database(entities = {PasswordEntryValDefinition.class},version = 1)
+@Database(entities = {PasswordEntryValDefinition.class},version = 2)
 public  abstract class AppDatabase extends RoomDatabase {
     public abstract  DataManager dataManager();
     private static AppDatabase instance;
@@ -18,7 +18,7 @@ public  abstract class AppDatabase extends RoomDatabase {
          {
              if(instance==null)
              {
-                 instance= Room.databaseBuilder(context.getApplicationContext(),AppDatabase.class,"PasswordEntry_Value_Definition").build();
+                 instance= Room.databaseBuilder(context.getApplicationContext(),AppDatabase.class,"PasswordEntry_Value_Definition").fallbackToDestructiveMigration().build();
              }
          }
      }
