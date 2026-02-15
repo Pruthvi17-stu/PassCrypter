@@ -26,6 +26,7 @@ public class addandmanagepage extends AppCompatActivity {
     private AppDatabase db;
     private RecyclerView recyclerView;
     private PasswordAdapter passwordAdapter;
+    private  EncryptionImplementer encryptionImplementer;
     Button clearbtn;
 
 
@@ -41,6 +42,13 @@ public class addandmanagepage extends AppCompatActivity {
             return insets;
         });
         db = AppDatabase.getDatbase(this);
+        try {
+            encryptionImplementer=new EncryptionImplementer(this);
+        } catch (GeneralSecurityException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
 
         recyclerView = findViewById(R.id.recyclerview);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -83,7 +91,7 @@ public class addandmanagepage extends AppCompatActivity {
 
             runOnUiThread(() -> {
 
-                passwordAdapter = new PasswordAdapter(entries);
+                passwordAdapter = new PasswordAdapter(entries,encryptionImplementer,db);
                 recyclerView.setAdapter(passwordAdapter);
             });
         }).start();

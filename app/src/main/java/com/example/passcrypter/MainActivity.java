@@ -156,7 +156,7 @@ public class MainActivity extends AppCompatActivity {
                 strengthprogress.setProgress(weakPercentage, true);
 
                 if (weakPercentage == 0) {
-                    strengthprogress.setIndicatorColor(ContextCompat.getColor(this, android.R.color.holo_green_dark)); // All strong
+                    strengthprogress.setIndicatorColor(ContextCompat.getColor(this, android.R.color.holo_green_light)); // All strong
                 } else if (weakPercentage < 30) {
                     strengthprogress.setIndicatorColor(ContextCompat.getColor(this, android.R.color.holo_orange_light)); // Some weak
                 } else {

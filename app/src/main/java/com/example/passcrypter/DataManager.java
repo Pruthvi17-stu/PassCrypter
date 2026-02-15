@@ -3,6 +3,7 @@ package com.example.passcrypter;
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
+import androidx.room.Update;
 
 import java.util.List;
 
@@ -18,4 +19,6 @@ public interface DataManager {
     void deleteAll();
 
 
+    @Update
+    void updateEntry(PasswordEntryValDefinition entry);
 }
